@@ -12,11 +12,13 @@
   "author": "Micheal Cob and Damaris Ola-Foluwe",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.16.0",
     "express": "^4.14.1",
     "jsonwebtoken": "^7.2.1",
     "mongodb": "^2.2.33",
     "mongoose": "^4.10.8",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "nodemon": "^1.12.1"
   }
 }

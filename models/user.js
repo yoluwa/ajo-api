@@ -1,12 +1,37 @@
 /**
  * Created by user on 2/3/2017.
  */
-var mongoose = require ('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require ('../config/db');
 
-//set up a mongoose model and pass it using modelu.exports
-module.exports = mongoose.model('User', new Schema({
-    email: String,
-    password: String,
-    phone: String
-}));
+var User = mongoose.model('User', {
+    email: {
+        type: String, required: true, minlength: 1
+    },
+    password: {
+        type: String, required: true, minlength: 1
+    },
+    name: {
+        type: String, required: true, minlength: 1
+    },
+    date_of_birth: {
+        type: String, required: true
+    },
+    phone: {
+        type: Number, required: true
+    },
+    bvn: {
+        type: Number, required: true
+    },
+    account_number: {
+        type: Number, required: true
+    },
+    bank_name: {
+        type: Number, required: true
+    },
+    security_question: {
+        type: String, required: true
+    }
+});
+
+module.exports = User;
+
