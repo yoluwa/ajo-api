@@ -30,6 +30,9 @@ var User = mongoose.model('User', {
     },
     security_question: {
         type: String, required: true
+    },
+    answer_to_security: {
+        type: String, required: true
     }
 });
 

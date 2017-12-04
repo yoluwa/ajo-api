@@ -22,6 +22,7 @@ module.exports.create = function(req, res, next) {
        bvn: req.body.bvn,
        account_number: req.body.account_number,
        security_question: req.body.security_question,
+       answer_to_security: req.body.answer_to_security,
        date_of_birth: req.body.date_of_birth,
        bank_name: req.body.bank_name
     });
