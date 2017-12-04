@@ -29,6 +29,6 @@ module.exports.create = function(req, res, next) {
     user.save().then(function(doc){
         Response.sendSuccess(res,doc)
     }, function(err){
-        Response.sendSuccess(res, err)
+        Response.sendError(res, err)
     });
 };

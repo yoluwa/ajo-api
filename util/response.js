@@ -5,6 +5,6 @@ module.exports.sendSuccess = function (res, content) {
 };
 
 module.exports.sendError = function (res, content) {
-    res.status(400);
+    res.status(200);
     res.json({status: 'error', data: content});
 };
