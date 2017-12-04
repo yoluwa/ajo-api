@@ -16,7 +16,7 @@ module.exports.create = function(req, res, next) {
     });
     var user = new User({
        name: req.body.name,
-       password: hashed_password,
+       password: req.body.password,
        email: req.body.email,
        phone: req.body.phone,
        bvn: req.body.bvn,
