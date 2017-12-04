@@ -26,7 +26,7 @@ var User = mongoose.model('User', {
         type: Number, required: true
     },
     bank_name: {
-        type: Number, required: true
+        type: String, required: true
     },
     security_question: {
         type: String, required: true
