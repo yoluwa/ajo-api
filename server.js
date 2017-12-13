@@ -6,6 +6,7 @@ var app = express();
 var bodyParser = require ('body-parser');
 var morgan = require ('morgan');
 var jwt = require('jsonwebtoken');
+var constants = require('./util/constants');
 
 var api = require('./routes/index');
 var port = process.env.PORT || 8080;
