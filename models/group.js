@@ -8,7 +8,7 @@ var Group = mongoose.model('Group', {
         type: String, required: true, minlength: 1
     },
     creator: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User', select: false
     },
     reason: {
         type: String, required: true, minlength: 1

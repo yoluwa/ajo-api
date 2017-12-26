@@ -63,8 +63,8 @@ module.exports.authenticate = function(req, res, next) {
     });
 };
 
-module.exports.groups = function(req, res, next) {
-    User.findById(req.decoded_token.id).exec(function(err, user){
+module.exports.profile = function(req, res, next) {
+    User.findById(req.decoded_token.id).populate('groups').exec(function(err, user){
         if (user) {
             Response.sendSuccess(res, user)
         } else {

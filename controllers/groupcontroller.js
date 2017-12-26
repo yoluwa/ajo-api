@@ -37,9 +37,12 @@ module.exports.create = function(req, res, next) {
             });
 
         var saveGroup = function () {
-            console.log(group.members);
             if (members.length === group.members.length) {
                 group.save().then(function (doc) {
+                    User.findById(req.decoded_token.id).exec().then(function(user){
+                       user.groups.push(doc._id);
+                       user.save();
+                    });
                     return Response.sendSuccess(res, doc)
                 })
             }

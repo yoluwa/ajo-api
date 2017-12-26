@@ -11,6 +11,6 @@ router.post('/register', UserController.create);
 router.post('/login', UserController.authenticate);
 router.use('/user', [Auth.isAuthenticated]);
 router.post('/user/group/create', GroupController.create);
-router.get('/user/groups', UserController.groups);
+router.get('/user/profile', UserController.profile);
 
 module.exports = router;
