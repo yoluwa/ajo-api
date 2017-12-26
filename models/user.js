@@ -8,7 +8,7 @@ var User = mongoose.model('User', {
         type: String, required: true, minlength: 1
     },
     password: {
-        type: String, required: true, minlength: 1
+        type: String, required: true, minlength: 1, select: false
     },
     name: {
         type: String, required: true, minlength: 1
@@ -29,11 +29,12 @@ var User = mongoose.model('User', {
         type: String, required: true
     },
     security_question: {
-        type: String, required: true
+        type: String, required: true, select: false
     },
     answer_to_security: {
-        type: String, required: true
-    }
+        type: String, required: true, select: false
+    },
+    groups: [{type: mongoose.Schema.Types.ObjectId, ref: 'Group'}]
 });
 
 module.exports = User;

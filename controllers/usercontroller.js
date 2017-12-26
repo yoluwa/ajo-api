@@ -4,6 +4,14 @@ var bcrypt = require('bcrypt');
 var ERRORS = require('../util/errors');
 var jwt = require('../util/jwt');
 
+module.exports.userExistsById = function(id) {
+    return User.findById(id).exec();
+};
+
+module.exports.userExistsByEmail = function(email) {
+    return User.findOne({email: email}).exec();
+};
+
 module.exports.index = function(req, res, next) {
     User.find({}).sort('-date').then(function(doc) {
         Response.sendSuccess(res, doc)
@@ -37,13 +45,13 @@ module.exports.create = function(req, res, next) {
 module.exports.authenticate = function(req, res, next) {
     var user = User.findOne({
         email : req.body.email
-    }).then(function(doc) {
+    }, '+password').then(function(doc) {
         if (!doc) {
             Response.sendError(res, {'message' : ERRORS.USER_NOT_FOUND});
         } else {
             bcrypt.compare(req.body.password, doc.password, function(err,result) {
                 if (result) {
-                    var token = jwt.createToken({email: doc.email, password: doc.password});
+                    var token = jwt.createToken({email: doc.email, id: doc._id});
                     Response.sendSuccess(res, {'token': token});
                 } else {
                     Response.sendError(res, {'message' : ERRORS.INCORRECT_LOGIN})
@@ -53,4 +61,14 @@ module.exports.authenticate = function(req, res, next) {
     }, function(err) {
         Response.sendError(res, err)
     });
+};
+
+module.exports.groups = function(req, res, next) {
+    User.findById(req.decoded_token.id).exec(function(err, user){
+        if (user) {
+            Response.sendSuccess(res, user)
+        } else {
+            Response.sendError(res, ERRORS.USER_NOT_FOUND);
+        }
+    })
 };

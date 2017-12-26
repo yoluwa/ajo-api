@@ -7,3 +7,11 @@ module.exports.createToken = function(payload) {
     });
     return token;
 };
+
+module.exports.verifyToken = function(token) {
+    try {
+        return jwt.verify(token, CONSTANTS.JWT_SECRET);
+    } catch(err) {
+        return null;
+    }
+};
