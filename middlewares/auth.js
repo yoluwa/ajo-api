@@ -13,6 +13,6 @@ module.exports.isAuthenticated = function(req, res, next) {
             return next();
         }
     } else {
-        Response.sendAuthError(res,{'message': ERRORS.TOKEN_REQUIRED})
+        Response.sendAuthError(res, {'message': ERRORS.TOKEN_REQUIRED})
     }
 };

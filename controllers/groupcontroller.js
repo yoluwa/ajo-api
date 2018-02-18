@@ -50,3 +50,15 @@ module.exports.create = function(req, res, next) {
 
     }
 };
+
+module.exports.isUserEligible = function(req, res, next) {
+    User.findOne({'email': req.params.email}).exec().then(function(user) {
+        if (user.wallet_balance <= req.params.amount) {
+            return Response.sendError(res, {'message': ERRORS.INSUFFICIENT_FUNDS});
+        } else {
+            return Response.sendSuccess(res, user);
+        }
+    }).catch(function() {
+        return Response.sendError(res, {'message': ERRORS.USER_NOT_FOUND})
+    })
+};

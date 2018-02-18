@@ -19,6 +19,10 @@
     "mongodb": "^2.2.33",
     "mongoose": "^4.10.8",
     "morgan": "^1.7.0",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "eslint-config-google": "^0.9.1"
   }
 }

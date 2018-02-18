@@ -6,5 +6,7 @@ module.exports = {
     EXPIRED_TOKEN: 'Expired token',
     MINIMUM_MEMBERS: 'Add at least a member',
     CREATOR_ERROR: 'You cannot add yourself again',
-    UNIQUE_GROUP_NAME: 'Group name already exists'
+    UNIQUE_GROUP_NAME: 'Group name already exists',
+    INCORRECT_REFERENCE: 'Payment reference is incorrect. Please re-attempt',
+    INSUFFICIENT_FUNDS: 'Insufficient funds'
 };

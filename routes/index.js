@@ -12,5 +12,7 @@ router.post('/login', UserController.authenticate);
 router.use('/user', [Auth.isAuthenticated]);
 router.post('/user/group/create', GroupController.create);
 router.get('/user/profile', UserController.profile);
+router.post('/user/wallet/fund', UserController.fundWallet);
+router.get('/user/:email/:amount/eligible', GroupController.isUserEligible);
 
 module.exports = router;

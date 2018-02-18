@@ -3,7 +3,7 @@
  */
 var mongoose = require ('../config/db');
 
-var User = mongoose.model('User', {
+var UserSchema = new mongoose.Schema({
     email: {
         type: String, required: true, minlength: 1
     },
@@ -20,7 +20,7 @@ var User = mongoose.model('User', {
         type: Number, required: true
     },
     bvn: {
-        type: Number, required: true
+        type: Number, required: true, minlength: 1
     },
     account_number: {
         type: Number, required: true
@@ -34,8 +34,18 @@ var User = mongoose.model('User', {
     answer_to_security: {
         type: String, required: true, select: false
     },
+    wallet_balance: {
+        type: Number, default: 0
+    },
+    created_at: {
+        type: Date, default: Date.now()
+    },
     groups: [{type: mongoose.Schema.Types.ObjectId, ref: 'Group'}]
 });
 
-module.exports = User;
+UserSchema.pre('save', function(next) {
+   const user = this;
+});
+
+module.exports = mongoose.model('User', UserSchema);
 

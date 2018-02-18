@@ -3,6 +3,7 @@ var Response = require('../util/response');
 var bcrypt = require('bcrypt');
 var ERRORS = require('../util/errors');
 var jwt = require('../util/jwt');
+var paymentprovider = require('./paymentprovider');
 
 module.exports.userExistsById = function(id) {
     return User.findById(id).exec();
@@ -21,6 +22,7 @@ module.exports.index = function(req, res, next) {
 };
 
 module.exports.create = function(req, res, next) {
+
     bcrypt.hash(req.body.password,10, function(err, hash) {
         var user = new User({
             name: req.body.name,
@@ -68,7 +70,23 @@ module.exports.profile = function(req, res, next) {
         if (user) {
             Response.sendSuccess(res, user)
         } else {
-            Response.sendError(res, ERRORS.USER_NOT_FOUND);
+            Response.sendError(res, {'message': ERRORS.USER_NOT_FOUND});
         }
     })
+};
+
+module.exports.creditUser = function(id, amount) {
+    return User.findByIdAndUpdate(id, {wallet_balance: amount}).exec();
+};
+
+module.exports.fundWallet =  function (req, res, next) {
+    paymentprovider.verifyReference(req, req.body.reference).then(function(data) {
+        this.creditUser(req.decoded_token.id).then(function (doc){
+            Response.sendSuccess(res, doc);
+        }).catch( function(err) {
+            Response.sendError(res, {'message': err})
+        })
+    }).catch(function () {
+        Response.sendError(res, {'message': ERRORS.INCORRECT_REFERENCE});
+    });
 };
